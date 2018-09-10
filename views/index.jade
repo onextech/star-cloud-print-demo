@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(action='print', method='post')
+    p
+      | Text:
+      input(name='text', value='Print Me', type='text')
+    button(type='submit') Print
+
