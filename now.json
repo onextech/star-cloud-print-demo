@@ -1,7 +1,7 @@
 {
   "name": "star-cloudprint-demo",
   "alias": [
-    "cloudprint.onextech.com"
+    "cloudprint.onebanquet.com"
   ],
   "type": "npm",
   "engines": {
