@@ -1,0 +1,10 @@
+{
+  "name": "star-cloud-print-demo",
+  "alias": [
+    "cloudprint.onextech.com"
+  ],
+  "type": "npm",
+  "engines": {
+    "node": "^8.0.0"
+  }
+}
