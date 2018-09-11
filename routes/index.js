@@ -102,21 +102,20 @@ router.post('/print', (req, res, next) => {
  * Tells the printer that there is a job in the server for printing
  */
 router.post('/poll', (req, res) => {
-  console.log('POST to poll');
-  return res.json({ jobReady: true })
+  console.log('POST to poll')
+  res.status(200)
+  res.setHeader('Content-Type', 'application/json')
+  return res.json({ jobReady: true, mediaTypes: ['text/plain', 'image/png'], deleteMethod: 'DELETE' })
 })
 
 // [http/https]://[cloudprntURL]?uid=<printer ID>&type=<media type>&mac=<mac address>
 router.get('/poll', (req, res, next) => {
   console.log('GET at poll -> req.query', req.query)
+  const printContent = 'print me'
   const { uid, type, mac } = req.query
-  return res.send({
-    status: 200,
-    headers: {
-      'Content-Type': 'text/xml',
-    },
-    body: xml,
-  })
+  res.setHeader('Content-Type', 'text/plain')
+  res.status(200)
+  return res.send(printContent)
 })
 
 module.exports = router;
