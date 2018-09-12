@@ -102,10 +102,9 @@ router.get('/poll', (req, res, next) => {
 
   printer.setTypeFontB()
   printer.println('Font Type B')
-/*
-  // doesn't work on our Star printer
+
   printer.drawLine()
-*/
+
   printer.cut()
 
   const buffer = printer.getBuffer()
