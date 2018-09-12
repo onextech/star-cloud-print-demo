@@ -78,12 +78,12 @@ router.get('/poll', (req, res, next) => {
     { text: 'Right', align: 'RIGHT', width: 0.25 }
   ])
 /*
-  // not working
-  printer.printImage('../logo_playstation.png', function (done) { printer.cut() })
+  // working. will have to enclose everything else after printing of image in callback.
+  const file = path.join(__dirname, '../logo_playstation.png');
+  printer.printImage(file, function (done) { printer.cut() })
 
   printer.partialCut()
 
-  // not working
   printer.printQR('www.google.com') // Print QR code
 */
   printer.cut()
