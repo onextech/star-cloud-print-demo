@@ -222,6 +222,10 @@ css@~1.0.8:
     css-parse "1.0.4"
     css-stringify "1.0.5"
 
+dank-do-while@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/dank-do-while/-/dank-do-while-0.1.2.tgz#819b25937b9777657b56f5172ad856596fcd0c84"
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -568,6 +572,19 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+net@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/net/-/net-1.0.2.tgz#d1757ec9a7fb2371d83cf4755ce3e27e10829388"
+
+node-thermal-printer@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/node-thermal-printer/-/node-thermal-printer-2.0.0.tgz#5c198cf10d9654a3e8fdcce7c4da54c85438a475"
+  dependencies:
+    net "^1.0.2"
+    pngjs "^3.2.0"
+    unorm "^1.4.1"
+    write-file-queue "0.0.1"
+
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
@@ -599,6 +616,10 @@ path-to-regexp@0.1.7:
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
+
+pngjs@^3.2.0:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.3.tgz#85173703bde3edac8998757b96e5821d0966a21b"
 
 promise@^6.0.1:
   version "6.1.0"
@@ -830,6 +851,10 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
+unorm@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/unorm/-/unorm-1.4.1.tgz#364200d5f13646ca8bcd44490271335614792300"
+
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
@@ -876,6 +901,12 @@ wordwrap@0.0.2:
 wordwrap@~0.0.2:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
+
+write-file-queue@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/write-file-queue/-/write-file-queue-0.0.1.tgz#3764f614451806e9612c969b770d830a6a8115e9"
+  dependencies:
+    dank-do-while "^0.1.2"
 
 yargs@~3.10.0:
   version "3.10.0"

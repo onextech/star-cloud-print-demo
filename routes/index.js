@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
-
 const path = require('path')
+const printer = require('node-thermal-printer')
 
 const asd = require('./asd')
 
@@ -17,19 +17,27 @@ router.post('/poll', (req, res) => {
   res.status(200)
   res.setHeader('Content-Type', 'application/json')
   const jobReady = !printed
-  return res.json({ jobReady, mediaTypes: ['image/jpeg'], deleteMethod: 'DELETE' })
+  // const jobReady = true
+  return res.json({ jobReady, mediaTypes: ['application/vnd.star.line'], deleteMethod: 'DELETE' })
 })
 
 // [http/https]://[cloudprntURL]?uid=<printer ID>&type=<media type>&mac=<mac address>
-// Prints a mountain image
 router.get('/poll', (req, res, next) => {
   console.log('GET at poll -> req.query', req.query)
   console.log('hi i am at get /poll')
-  const file = path.join(__dirname, '../mountains.jpeg');
-  res.setHeader('Content-Type', 'image/jpeg')
+  res.setHeader('Content-Type', 'application/vnd.star.line')
+  printer.init({ type: 'star', interface: '/dev/usb/lp0' });
+  printer.alignCenter();
+  printer.bold(true);
+  printer.setTextDoubleHeight();
+  printer.println('Hello world');
+  const buffer = printer.getBuffer();
   res.status(200)
+  console.log('========================')
+  console.log('Buffer', buffer);
+  console.log('========================')
   printed = true
-  res.sendFile(file)
+  res.send(buffer)
 })
 
 module.exports = router;
