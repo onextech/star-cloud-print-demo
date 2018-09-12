@@ -16,8 +16,8 @@ router.post('/poll', (req, res) => {
   console.log('POST to poll -> req.body', req.body)
   res.status(200)
   res.setHeader('Content-Type', 'application/json')
-  const jobReady = !printed
-  // const jobReady = true
+  // const jobReady = !printed
+  const jobReady = true
   return res.json({ jobReady, mediaTypes: ['application/vnd.star.line'], deleteMethod: 'DELETE' })
 })
 
@@ -29,7 +29,6 @@ router.get('/poll', (req, res, next) => {
   printer.init({ type: 'star', interface: '/dev/usb/lp0' });
   printer.alignCenter();
   printer.bold(true);
-  printer.setTextDoubleHeight();
   printer.println('Hello world');
   const buffer = printer.getBuffer();
   res.status(200)
