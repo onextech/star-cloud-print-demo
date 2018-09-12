@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const printer = require('node-thermal-printer')
 
 const Queue = require('../utils/Queue')
 
 const printJobs = new Queue()
+const MAX_QUANTITY_CHARS = 3
 
 /* GET */
 router.get('/', function(req, res, next) {
@@ -17,31 +19,50 @@ router.get('/', function(req, res, next) {
 router.post('/printReceipt', function(req, res, next) {
   const reqParams = req.body
   const { queueNo, orderDetails } = reqParams
-  const orderDetailsFormatted = Object.values(orderDetails).map((orderItems) => {
+
+  printer.init({ type: 'star', interface: '/dev/usb/lp0' })
+  printer.alignCenter()
+  printer.println('AH SENG DURIAN')
+  printer.println('------------------------------------------------')
+
+  printer.println('Your Queue number is')
+  printer.setTextQuadArea()
+  printer.bold(true)
+  printer.println(queueNo)
+  printer.bold(false)
+  printer.setTextNormal()
+  printer.println('------------------------------------------------')
+
+  printer.alignLeft()
+  Object.values(orderDetails).forEach((orderItems) => {
     const { quantity, title, subtitle } = orderItems
-    const orderItemFormatted = `  ${quantity} x ${title}\n`
+    printer.tableCustom([
+      { text: quantity.toString().padStart(MAX_QUANTITY_CHARS, ' '), align: 'CENTER', width: 0.1 },
+      { text: 'x', align: 'CENTER', width: 0.1 },
+      { text: title, align: 'LEFT', width: 0.6, bold: true },
+    ])
     if (subtitle) {
-      const orderItemSubtitleFormatted = `    - ${subtitle}\n`
-      return orderItemFormatted + orderItemSubtitleFormatted
+      printer.tableCustom([
+        { text: String().padStart(MAX_QUANTITY_CHARS, ' '), align: 'CENTER', width: 0.1 },
+        { text: '-', align: 'CENTER', width: 0.1 },
+        { text: subtitle, align: 'LEFT', width: 0.6 },
+      ])
     }
-    return orderItemFormatted
   })
-  const printContent =
-    '                 AH SENG DURIAN                 \n' +
-    '------------------------------------------------\n' +
-    '              Your Queue Number is              \n' +
-    `                      ${queueNo}\n` +
-    '------------------------------------------------\n' +
-    orderDetailsFormatted.join('') +
-    '------------------------------------------------\n' +
-    '  Please present this ticket at the collection  \n' +
-    '  counter when your queue number is called.     \n' +
-    '                                                \n' +
-    '  To check on the queue status, log onto        \n' +
-    '  https://www.google.com/doodles                \n' +
-    '                                                \n' +
-    '  Date & Time: 11-09-2018 20:30                 \n'
-  printJobs.add(printContent)
+  printer.println('------------------------------------------------')
+
+  printer.println('Please present this ticket at the collection')
+  printer.println('counter when your queue number is called.')
+  printer.newLine()
+  printer.println('To check on the queue status, log onto')
+  printer.println('https://www.google.com/doodles')
+  printer.newLine()
+  printer.println('Date & Time: 11-09-2018 20:30')
+
+  const buffer = printer.getBuffer()
+  printJobs.add(buffer)
+  printer.clear()
+
   res.status(200)
   return res.send('ok')
 })
